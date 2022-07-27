@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OLFRAGRANCE
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="p-2 bg-light">
+		<div class="container">
+
+			<div class="dropdown mx-auto text-end  mr-4">
+				<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+					Filtre
+				</a>
+
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					{% for brand in distinctBrand %}
+						<li>
+							<a class="dropdown-item" href="{{path('app_filter', {'author':brand.author})}}">{{ brand.author}}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<hr class="my-2">
+				<hr class="my-2">
+			{% if app.user %}
+
+				{% if app.user.roles[0] == "ROLE_ADMIN" %}
+					<p>
+						<a class="btn btn-primary btn-lg" href="{{ path('new') }}" role="button">Ajouter un parfum</a>
+					</p>
+
+
+				{% endif %}
+			{% endif %}
+			
+		</div>
+	</div>
+
+	<div class="container mt-4">
+		<div class="row my-2">
+			{% for parfum in items %}
+				<div class="col-md-6 col-lg-4">
+					<div class="card text-start my-2 ">
+						<a href="{{ path('show', {'id':parfum.id}) }}">
+							<img class="card-img-top" src="{{parfum.image}}" alt="Parfum H en illustration visuel (image)">
+						</a>
+						<div class="card-body">
+							<h4 class="card-title">{{parfum.title}}</h4>
+							<em class="text-end">
+								<a class="btn btn-secondary" href="{{ path('show', {'id':parfum.id}) }}">Voir</a>
+								<div class="">
+									{% if is_granted("ROLE_USER") %}
+										{% for  reservedBy in parfum.reservedBy %}
+											{% if reservedBy.id == app.user.id %}
+												<a href="{{path('app_delete_favoris', {id: parfum.id})}}">
+													<i class="bi bi-bookmark-fill"></i>
+												</a>
+											{% else %}
+
+												<a href="{{path('app_add_favoris', {id: parfum.id})}}">
+													<i class="bi bi-bookmark"></i>
+												</a>
+											{% endif %}
+										{% else %}
+												<a href="{{path('app_add_favoris', {id: parfum.id})}}">
+													<i class="bi bi-bookmark"></i>
+												</a>
+										{% endfor %}
+									{% else %}
+									<a href="{{path('app_login')}}">
+									
+										<i class="bi bi-bookmark"></i>
+									</a>
+									{% endif %}
+									{# {{ dump(reservedBy) }} #}
+								</div>
+							</em>
+
+
+							{% if app.user %}
+
+								{% if app.user.roles[0] == "ROLE_ADMIN" %}
+
+									<em class="text-end">
+										<a class="btn btn-secondary" href="{{ path('edit', {'id':parfum.id}) }}">modifier</a>
+									</em>
+								{% endif %}
+							{% endif %}
+							<hr>
+							<p class="card-text">{{parfum.content  | striptags | slice(0,200)}}
+								...
+							</p>
+							<!-- Pour concaténer en twig on utilisera le tilde (~) (altgr * 2) "~" -->
+							<!-- Pour ajouter la barre verticale (le pipe) "|" [ou barre verticale]  -->
+						</div>
+						<div class="card-footer">
+							<strong>{{parfum.author}}</strong>
+							<hr>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}OLFRAGRANCE
+{% endblock %}
+
+{% block body %}
+
+<section class="bg-secondary">
+
+    <div class="container d-flex justify-content-center align-items-center flex-column">
+
+        <h1>Notes préféres</h1>
+
+        <table class="table mt-5 container">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nom</th>
+                    <th>agrumes</th>
+                    <th>boisées</th>
+                    <th>animales</th>
+                    <th>epicées</th>
+                    <th>florales</th>
+                    <th>fruitées</th>
+                    <th>sucrées</th>
+                    <th>vertes</th>
+                </tr>
+            </thead>
+            <tbody id="classement"></tbody>
+        </table>
+
+    </div>
+
+    <div id="graphique" class=" mx-auto row d-flex col-10 bg-dark">
+       
+
+       	{% for favoris in userFavoris %}
+				<div class="col-md-6 col-lg-4">
+					<div class="card text-start my-2 ">
+						<a href="{{ path('show', {'id':favoris.id}) }}">
+							<img class="card-img-top" src="{{favoris.image}}" alt="Parfum H en illustration visuel (image)">
+						</a>
+						<div class="card-body">
+							<h4 class="card-title">{{favoris.title}}</h4>
+							<em class="text-end">
+								<a class="btn btn-secondary" href="{{ path('show', {'id':favoris.id}) }}">Voir</a>
+								<div class="">
+									{% if is_granted("ROLE_USER") %}
+										{% for  reservedBy in favoris.reservedBy %}
+											{% if reservedBy.id == app.user.id %}
+												<a href="{{path('app_delete_favoris', {id: favoris.id})}}">
+													<i class="bi bi-bookmark-fill"></i>
+												</a>
+											{% else %}
+
+												<a href="{{path('app_add_favoris', {id: favoris.id})}}">
+													<i class="bi bi-bookmark"></i>
+												</a>
+											{% endif %}
+										{% else %}
+												<a href="{{path('app_add_favoris', {id: favoris.id})}}">
+													<i class="bi bi-bookmark"></i>
+												</a>
+										{% endfor %}
+									{% else %}
+									<a href="{{path('app_login')}}">
+									
+										<i class="bi bi-bookmark"></i>
+									</a>
+									{% endif %}
+									{# {{ dump(reservedBy) }} #}
+								</div>
+							</em>
+
+
+							{% if app.user %}
+
+								{% if app.user.roles[0] == "ROLE_ADMIN" %}
+
+									<em class="text-end">
+										<a class="btn btn-secondary" href="{{ path('edit', {'id':favoris.id}) }}">modifier</a>
+									</em>
+								{% endif %}
+							{% endif %}
+							<hr>
+							<p class="card-text">{{favoris.content  | striptags | slice(0,200)}}
+								...
+							</p>
+							<!-- Pour concaténer en twig on utilisera le tilde (~) (altgr * 2) "~" -->
+							<!-- Pour ajouter la barre verticale (le pipe) "|" [ou barre verticale]  -->
+						</div>
+						<div class="card-footer">
+							<strong>{{favoris.author}}</strong>
+							<hr>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+	
+      </div>
+
+    
+        {# {{ dump(userFavoris) }} #}
+
+       
+		
+
+    <script src="{{asset('quiz/classement.js')}}"></script>
+
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OLFRAGRANCE
+{% endblock %}
+
+{% block body %}
+
+
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLFRAGRANCE</title>
+    
+</head>
+
+<body>
+
+    
+    
+    <div class="container d-flex justify-content-center align-items-center">
+
+        <div class="connection m-5">
+            <label for="pseudo">Pseudo:</label>
+            <input class="form-control" type="text" name="pseudo" id="input-pseudo">
+            <br>
+            <button class="btn btn-primary" id="btn-connection">Valider</button>
+
+        </div>
+
+
+    </div>
+
+    <script src="{{asset('quiz/index.js')}}"></script>
+</html>
+{% endblock %}

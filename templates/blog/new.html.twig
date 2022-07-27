@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}OLFRAGRANCE{% endblock %}
+
+{% block body %}
+	<div class="p-5 bg-light">
+		<div class="container">
+			<h1 class="display-3"></h1>
+			<p class="lead">
+				{% if modeEdit %}
+					Modifier un article
+				{% else %}
+					Ajouter un article: <br>
+					<small>mettre les nouveaux parfum disponible pour les commandes des clients </small>
+				{% endif %}
+			</p>
+			<hr class="my-2">
+				<a href="{{path('app_blog')}}" class="btn btn-primary">Retour aux parfums</a>
+
+		</div>
+	</div>
+
+    <div class="container">
+
+        <div class="p-5 shadow rounded">
+
+        {{form_start(form)}}
+		{{form_start(form, {'attr' : {'class' : 'col-md-6 mx-auto m text-primary fw-bolder'}})}}
+            {{form_row(form.title, {'attr': {'placeholder' : 'Titre de l\'article'}, 'label' : 'Titre'})}}
+            {{form_row(form.content, {'attr': {'label' : 'contenu'}})}}
+            {{form_row(form.image, {'attr': {'placeholder' : 'URL de l\'image'}, 'label' : 'Image'})}}
+            {{form_row(form.author, {'attr': {'placeholder' : 'Auteur de l\'article'}, 'label' : 'Auteur'})}}
+        {{form_end(form) }}
+        
+        </div>
+    </div>
+
+{% endblock %}

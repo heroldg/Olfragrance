@@ -1,0 +1,16 @@
+
+.form-inscription, .form-connexion   {
+    padding: 10px 25%;
+
+}
+
+form .btn {
+    background-color: #104f52a8;
+    color: white;
+    margin: 10px auto;
+    border: none;
+    width: 50%;
+    border-radius: 3px;
+    font-size: 17px;
+
+}

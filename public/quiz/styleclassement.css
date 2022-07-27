@@ -1,0 +1,8 @@
+body {
+    background: #cfcdb8;
+}
+
+img {
+    height: 25vw;
+    object-fit:cover;
+}

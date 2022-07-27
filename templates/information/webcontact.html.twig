@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{# <link rel="stylesheet" href="webcvcontact.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
+ #}
+
+{% block title %}OLFRAGRANCE
+{% endblock %}
+
+
+{% block body %}
+
+
+	<main class="container">
+		<p id="contact">Contact</p>
+		<br>
+		<br>
+		<form class=" container ms-5 form mx-auto" action="https://formspree.io/f/xoqrqond" method="POST">
+			<fieldset>
+				<label>
+					Your email:
+					<br>
+					<input class="border" type="email" name="_replyto" cols="30">
+				</label>
+				<br>
+			</fieldset>
+			<label>
+				Your message:
+				<br>
+				<textarea class="border" name="message" cols="30" rows="10"></textarea>
+				<br>
+			</label>
+			<!-- your other form fields go here -->
+			<button type="submit" class="ms-4 mb-5 border">Send</button>
+		</form>
+	</main>
+
+	<script src="{{asset('css/webcvcontact.css')}}"></script>
+
+
+{% endblock %}

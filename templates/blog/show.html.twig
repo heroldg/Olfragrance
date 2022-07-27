@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parfum.title}}
+	-
+	{{parfum.author}}
+{% endblock %}
+
+{% block body %}
+
+	<div class="p-5 bg-light">
+		<div class="container d-flex ">
+
+			<figure class="row w-25 h-25 m-3">
+				<img src="{{parfum.image}}" alt="" class="rounded">
+			</figure>
+			<div>
+				<h1 class="display-3">{{parfum.title}}</h1>
+				<p class="lead">{{parfum.author}}
+				</p>
+				<a href="{{path('app_blog')}}" class="btn btn-primary">Retour aux parfums</a>
+				<!-- Pour trouver le nom de notre page, il suffit d'aller sur le Controller correspondant et dans la ligne de la @Route regarder à l'endroit : name="nomRoute" -->
+
+			</div>
+
+
+			<hr class="my-2">
+		</div>
+
+	</div>
+
+	<div class="container row py-2 mx-auto">
+		<div class="row">
+            
+            <figure class="col-4">
+                <img src="{{parfum.image}}" alt="{{parfum.image}}" >
+            </figure>
+			<div
+				class=" p-5 col-6">
+				<!-- Le mot "raw" signifie que le PHP doit lire les balises et ne pas les traité comme du texte -->
+				{{parfum.content | raw}}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

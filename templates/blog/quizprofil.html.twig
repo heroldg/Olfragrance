@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}OLFRAGRANCE
+{% endblock %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div id="quiz" class="d-flex justify-content-center align-items-center flex-column">
+            <img src="{{asset('quiz/borddemer.jpg')}}" id="img-check" alt="suggestion de gout">
+            <h1 id="title" class="text-secondary">Quiz</h1>
+            <div id="choices" class="d-flex gap-5 py-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="choice" value="0" id="choice-1">
+                    <label class="form-check-label" id="label-choice-1" for="choice-1"></label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="choice" value="1" id="choice-2">
+                    <label class="form-check-label" id="label-choice-2" for="choice-2"></label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="choice" value="2" id="choice-3">
+                    <label class="form-check-label" id="label-choice-3" for="choice-3"></label>
+                </div>
+            </div>
+            <button id="submit-response" src="{{path('app_quiz')}}" class="mt-2 btn btn-secondary p-3">Valider</button>
+        </div>
+    </div>
+
+    <script src="{{asset('quiz/quiz.js')}}"></script>
+</body>
+</html>
+
+{% endblock %}
